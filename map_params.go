@@ -1,4 +1,4 @@
-package map_params
+package mp
 
 import (
 	"fmt"
@@ -8,11 +8,11 @@ import (
 
 // 参考 gocraft/work 中 job.Args 对 map[string]interface{} 的参数获取提供方便方法
 
-// MapParams 对 map[string]interface{} 的类型别名
-type MapParams map[string]interface{}
+// Params 对 map[string]interface{} 的类型别名
+type Params map[string]interface{}
 
 // 返回操作执行后的 error, 如果没有则为 nil
-func (m MapParams) Error() error {
+func (m Params) Error() error {
 	err, ok := m["$_error"]
 	if ok {
 		return err.(error)
@@ -21,7 +21,7 @@ func (m MapParams) Error() error {
 }
 
 // String 返回 key 键的字符串类型的值
-func (m MapParams) String(key string) string {
+func (m Params) String(key string) string {
 	v, ok := m[key]
 	if ok {
 		typedV, ok := v.(string)
@@ -36,7 +36,7 @@ func (m MapParams) String(key string) string {
 }
 
 // Bool 尝试返回布尔值, 如果解析错误返回默认的 false
-func (m MapParams) Bool(key string) bool {
+func (m Params) Bool(key string) bool {
 	v, ok := m[key]
 	if ok {
 		typedV, ok := v.(bool)
@@ -51,7 +51,7 @@ func (m MapParams) Bool(key string) bool {
 }
 
 // Int64 尝试返回 int64 值(float 类型也会尝试转换成为 int64)
-func (m MapParams) Int64(key string) int64 {
+func (m Params) Int64(key string) int64 {
 	v, ok := m[key]
 	if ok {
 		rVal := reflect.ValueOf(v)
@@ -77,7 +77,7 @@ func (m MapParams) Int64(key string) int64 {
 }
 
 // Float64 尝试返回 float64 值(int 类型也会尝试转换成为 float64)
-func (m MapParams) Float64(key string) float64 {
+func (m Params) Float64(key string) float64 {
 	v, ok := m[key]
 	if ok {
 		rVal := reflect.ValueOf(v)
