@@ -11,6 +11,11 @@ import (
 // Params 对 map[string]interface{} 的类型别名
 type Params map[string]interface{}
 
+// 返回原生的 map[string]interface{} 类型
+func (m Params) Origin() map[string]interface{} {
+	return m
+}
+
 // 返回操作执行后的 error, 如果没有则为 nil
 func (m Params) Error() error {
 	err, ok := m["$_error"]
